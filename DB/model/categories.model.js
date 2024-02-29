@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const categorySchema = new mongoose.Schema(
   {
-    userCategoryId: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId, // userId who i send message to him
       ref: "User", // to know who write this message
     },

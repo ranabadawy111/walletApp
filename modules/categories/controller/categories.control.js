@@ -3,11 +3,15 @@ import { userModel } from "../../../DB/model/user.model.js";
 
 const addCategory = async (req, res) => {
   try {
-    let { userCategoryId } = req.params; // userId
+    let userId = req.user._id // userId
     let { categoryName, categoryPic } = req.body;
-    let foundedUser = await userModel.findById(userCategoryId);
+    let foundedUser = await userModel.findById(userId);
     if (foundedUser) {
-      let addcategory = new categoriesModel({ userCategoryId, categoryName, categoryPic });
+      let addcategory = new categoriesModel({
+        userId,
+        categoryName,
+        categoryPic,
+      });
       let addedcategory = await addcategory.save();
       res.json({ message: "added", addedcategory });
     } else {

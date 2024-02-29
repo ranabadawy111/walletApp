@@ -29,7 +29,7 @@ const allExpenses = async (req, res) => {
 
 const allCategories = async (req, res) => {
   let userCategories = await categoriesModel.find({
-    userCategoryId: req.user._id,
+    userId: req.user._id,
   });
   res.json({ message: "userCategories", userCategories });
 };
