@@ -8,7 +8,7 @@ const addExpense = async (req, res) => {
   console.log("====================================");
   try {
     const userId = req.user._id;
-    
+
     const { categoryId, amount, title, description } = req.body;
     const category = await categoriesModel.findById(categoryId);
     if (!category) {

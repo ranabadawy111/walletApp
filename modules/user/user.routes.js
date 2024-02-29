@@ -13,7 +13,7 @@ const router = Router();
 // });
 
 router.get("/profile", auth(), profile);
-router.get("/allExpenses/:id", auth(), allExpenses);
+router.get("/expenses", auth(), allExpenses);
 router.get("/allCategories", auth(), allCategories);
 
 export default router;
