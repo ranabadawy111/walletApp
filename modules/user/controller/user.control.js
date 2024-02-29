@@ -16,10 +16,14 @@ const profile = async (req, res) => {
 // };
 const allExpenses = async (req, res) => {
   try {
+    console.log(req.params);
     const userId = req.user._id;
+    const { categoryId } = req.query;
+    console.log({ categoryId });
     // Assuming req.user._id represents the current user's ID
     let userExpenses = await expensesModel.find({
       userId,
+      ...(categoryId && { categoryId }),
     });
     res.json({ message: "User expenses retrieved successfully", userExpenses });
   } catch (error) {
