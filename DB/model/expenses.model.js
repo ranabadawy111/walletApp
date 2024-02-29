@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const expenseSchema = new mongoose.Schema(
   {
-    catIDForExpense: {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId, // userId
+      ref: "User", // to know which user that expenses belongs to it.
+    },
+    categoryId: {
       type: mongoose.Schema.Types.ObjectId, // categoryId
       ref: "categories", // to know which category that expenses belongs to it.
     },
@@ -10,11 +14,11 @@ const expenseSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    categoryName: {
+    title: {
       type: String,
       required: true,
     },
-    cateDescription: {
+    description: {
       type: String,
       required: true,
     },

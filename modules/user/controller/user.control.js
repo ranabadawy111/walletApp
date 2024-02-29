@@ -11,14 +11,14 @@ const profile = async (req, res) => {
 };
 // allExpenses
 // const allExpenses = async (req, res) => {
-//   let userExpenses = await expensesModel.find({ catIDForExpense: req.user._id });
+//   let userExpenses = await expensesModel.find({ categoryId: req.user._id });
 //   res.json({ message: "userExpenses", userExpenses });
 // };
 const allExpenses = async (req, res) => {
   try {
     // Assuming req.user._id represents the current user's ID
     let userExpenses = await expensesModel.find({
-      catIDForExpense: "65dfb6e804fa5f50a2d03781",
+      categoryId: "65dfb6e804fa5f50a2d03781",
     });
     res.json({ message: "User expenses retrieved successfully", userExpenses });
   } catch (error) {

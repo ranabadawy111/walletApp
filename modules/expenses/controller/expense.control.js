@@ -3,17 +3,29 @@ import { expensesModel } from "../../../DB/model/expenses.model.js";
 // import { userModel } from "../../../DB/model/user.model.js";
 
 const addExpense = async (req, res) => {
+  console.log("====================================");
+  console.log("asdasd");
+  console.log("====================================");
   try {
-    let { catIDForExpense } = req.params; // userId
-    let { amount, categoryName, cateDescription } = req.body;
-    let foundedUser = await categoriesModel.findById(catIDForExpense);
-    if (foundedUser) {
-      let addExpense = new expensesModel({ catIDForExpense, amount, categoryName, cateDescription });
-      let addedExpense = await addExpense.save();
-      res.json({ message: "added", addedExpense });
-    } else {
+    const userId = req.user._id;
+    
+    const { categoryId, amount, title, description } = req.body;
+    const category = await categoriesModel.findById(categoryId);
+    if (!category) {
       res.json({ message: "categoryID is not correct" });
     }
+
+    const expense = new expensesModel({
+      userId,
+      categoryId,
+      amount,
+      title,
+      description,
+    });
+
+    const addedExpense = await expense.save();
+
+    res.json({ message: "added", addedExpense });
   } catch (error) {
     res.json({ message: "error", error });
   }
