@@ -20,16 +20,15 @@ const userSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: "Picture.png",
-    },
-    salary: {
-      type: Number,
-      required: true,
+      default: "default.png",
     },
     dueDate: {
       type: String,
       required: true,
     },
+    // categoryName: String,
+    // categoryPic: String,
+    code: String,
   },
   { timestamps: true }
 );

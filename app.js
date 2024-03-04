@@ -11,6 +11,12 @@ server.use(`${baseURL}/auth`, routes.authRoute);
 server.use(`${baseURL}/user`, routes.userRoute);
 server.use(`${baseURL}/expense`, routes.expenseRoute);
 server.use(`${baseURL}/category`, routes.categoryRoute);
+server.use(`${baseURL}/income`, routes.incomeRoute);
+server.use(`${baseURL}/saving`, routes.billsRoute);
+server.use(`${baseURL}/saving`, routes.futurePlanningRoute);
+server.use(`${baseURL}/profile` , routes.profileRoute);
+
+server.use(`${baseURL}/uploads`, express.static("./uploads"));
 
 
 server.listen(3000, ()=>{

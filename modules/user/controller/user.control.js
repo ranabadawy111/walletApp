@@ -1,6 +1,31 @@
 import { expensesModel } from "../../../DB/model/expenses.model.js";
 import { userModel } from "../../../DB/model/user.model.js";
 import { categoriesModel } from "../../../DB/model/categories.model.js";
+import bcrypt from "bcryptjs";
+
+const updatePassword = async (req, res) => {
+  let { currentPssword, newPassword, nweCPassword } = req.body;
+  if (newPassword !== nweCPassword) {
+    res.json({ message: "new Password must match new confirm password!" });
+  }
+  const user = await userModel.findById(req.user._id);
+  let matched = await bcrypt.compare(currentPssword, user.password);
+  if (matched) {
+    const hashPassword = await bcrypt.hash(
+      newPassword,
+      parseInt(process.env.saltRound)
+    );
+    const updatePassword = await userModel.findByIdAndUpdate(
+      user._id,
+      { password: hashPassword },
+      { new: true }
+    );
+    res.json({ message: "password updated successfully", updatePassword });
+  } else {
+    res.json({ message: "current password not valid" });
+  }
+};
+
 const profile = async (req, res) => {
   let user = await userModel.findById(req.currentUserID);
   if (user) {
@@ -9,26 +34,19 @@ const profile = async (req, res) => {
     res.json({ message: "user not found" });
   }
 };
-// allExpenses
-// const allExpenses = async (req, res) => {
-//   let userExpenses = await expensesModel.find({ categoryId: req.user._id });
-//   res.json({ message: "userExpenses", userExpenses });
-// };
+
 const allExpenses = async (req, res) => {
   try {
-    console.log(req.params);
     const userId = req.user._id;
     const { categoryId } = req.query;
-    console.log({ categoryId });
-    // Assuming req.user._id represents the current user's ID
     let userExpenses = await expensesModel.find({
       userId,
       ...(categoryId && { categoryId }),
-    });
+    }); // getAllExpenseForOneCtegory if he send categoryID, if not getAllExpenseForAllCtegories
     res.json({ message: "User expenses retrieved successfully", userExpenses });
   } catch (error) {
-    console.error("Error fetching user expenses:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.json({ message: "error", error });
+    // res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -38,4 +56,54 @@ const allCategories = async (req, res) => {
   });
   res.json({ message: "userCategories", userCategories });
 };
-export { profile, allExpenses, allCategories };
+
+export const sendCode = async (req, res) => {
+  let { email } = req.body;
+  const user = await userModel.findOne({ email });
+  if (!user) {
+    res.json({ message: "you didn't register yet!" });
+  } else {
+    // const OTPCode = Math.floor(Math.random() * (1999 - 1940 + 1) + 1940);
+    const OTPCode = nanoid();
+    // here, we save code in DB
+    await userModel.findByIdAndUpdate(user._id, { code: OTPCode });
+    const message = `Your OTPCode is ${OTPCode}`;
+    sendEmail(user.email, message);
+    res.json({ message: "Done please check your email" });
+  }
+};
+
+// export const categoryPic = async (req, res) => {
+//   if (req.imageError) {
+//     res.json({ message: "Invalid Formate" });
+//   } else {
+//     if (!req.file) {
+//       res.json({ message: "please, upload image" });
+//     } else {
+//       const userId = req.user._id;
+//       const { categoryId } = req.query;
+
+//       let foundCategory = await categoriesModel.find({
+//         userId,
+//         categoryId,
+//       });
+//       if (foundCategory) {
+//         const updateCatePic = await categoriesModel.updateOne(
+//           {
+//             _id: categoryId,
+//           },
+//           { categoryPic: req.file.path }
+//         );
+//         res.json({ message: "Done", updateCatePic });
+//       }
+//       console.log(req.file);
+//       // await userModel.updateOne(
+//       //   { _id: req.user._id },
+//       //   { categoryPic: req.file.path }
+//       // );
+//       res.json({ message: "Done" });
+//     }
+//   }
+// };
+
+export { profile, allExpenses, allCategories, updatePassword };

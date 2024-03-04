@@ -12,8 +12,17 @@ const categorySchema = new mongoose.Schema(
     },
     categoryPic: {
       type: String,
+      default: "",
       required: true,
     },
+    // amount: {
+    //   type: Number,
+    //   required: true,
+    // },
+    // description: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   { timestamps: true }
 );
