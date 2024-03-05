@@ -4,7 +4,7 @@
   "description": "graduation_project",
   "main": "app.js",
   "engines": {
-    "node": "20.x"
+    "node": "18.x"
   },
   "type": "module",
   "scripts": {
