@@ -8,6 +8,7 @@ import {
   deleteAccount,
 } from "./controller/profile.control.js";
 
+
 // Multer configuration for profile picture upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

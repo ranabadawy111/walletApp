@@ -26,7 +26,7 @@ const addCategory = async (req, res) => {
 const updateCategory = async (req, res) => {
   try {
     const { categoryId } = req.params;
-    const { categoryName, categoryPic, amount, description } = req.body;
+    const { categoryName, categoryPic } = req.body;
     const category = await categoriesModel.findById(categoryId);
     if (!category) {
       res.json({ message: "categoryID is not correct" });
@@ -37,9 +37,7 @@ const updateCategory = async (req, res) => {
       },
       {
         categoryName,
-        categoryPic,
-        amount,
-        description,
+        categoryPic
       },
       { new: true }
     );
