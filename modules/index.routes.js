@@ -6,7 +6,7 @@ import incomeRoute from "./income/income.route.js";
 import billsRoute from "./Bills/bills.routes.js";
 import futurePlanningRoute from "./futurePlanning/futurePlanning.routes.js";
 import profileRoute from "./Profile/profile.routes.js";
-
+import salaryRoute from "./salary/salary.routes.js";
 export {
     authRoute,
     userRoute,
@@ -16,4 +16,5 @@ export {
     billsRoute,
     futurePlanningRoute,
     profileRoute,
+    salaryRoute,
 }

@@ -24,5 +24,6 @@ router.get(
   myMulter(validationType.image, "uploads").single("image"),
   categoryPic
 );
+// https://walletapp-4pbn.onrender.com/api/v1/uploads/pIOF2PQlENeK-_YxfBtRc_up.jpg
 // to get image on browser we use => http://localhost:3000/api/v1/uploads/pGnic1Tc5LdaUTZu6s8Ii_up.jpg
 export default router;

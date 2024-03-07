@@ -26,8 +26,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // categoryName: String,
-    // categoryPic: String,
     code: String,
   },
   { timestamps: true }

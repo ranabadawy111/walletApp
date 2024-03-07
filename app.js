@@ -15,6 +15,7 @@ server.use(`${baseURL}/income`, routes.incomeRoute);
 server.use(`${baseURL}/saving`, routes.billsRoute);
 server.use(`${baseURL}/saving`, routes.futurePlanningRoute);
 server.use(`${baseURL}/profile` , routes.profileRoute);
+server.use(`${baseURL}/salary` , routes.salaryRoute);
 
 server.use(`${baseURL}/uploads`, express.static("./uploads"));
 
