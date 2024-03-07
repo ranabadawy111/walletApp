@@ -18,23 +18,27 @@ export const totalSalry = async (req, res) => {
       expenses,
     });
     let addedSalary = await addSalary.save();
-
-    const threshold = incomes * 0.2;
-    const userSalaryRest = incomes - expenses; 
-    console.log(threshold, userSalaryRest);
+    // const threshold = incomes * 0.2;
+    const userSalaryRest = incomes - expenses;
 
     const id = setInterval(async () => {
-      if (userSalaryRest <= threshold) {
-        console.log("ssssss");
+      if (userSalaryRest <= incomes * 0.5  && userSalaryRest > incomes * 0.2) { //2500
+        res.json({
+          message: `"Note: Your salary has reached 50%."`,
+        });
+        clearInterval(id);
+      } else if (userSalaryRest <= incomes * 0.2) { //1000
         res.json({
           message: `"Note: Your salary has reached 80%."`,
         });
+        clearInterval(id);
       } else {
         res.json({
           message: `"Note: Your salary is: ${userSalaryRest}"`,
         });
+        clearInterval(id);
       }
-    }, 24 * 60 * 60 * 1000); // Run every 24 hours
+    }, 1000); // Run every 24 hours
   } catch (error) {
     res.json({ message: "error", error });
   }
