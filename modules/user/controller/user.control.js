@@ -73,37 +73,9 @@ export const sendCode = async (req, res) => {
   }
 };
 
-// export const categoryPic = async (req, res) => {
-//   if (req.imageError) {
-//     res.json({ message: "Invalid Formate" });
-//   } else {
-//     if (!req.file) {
-//       res.json({ message: "please, upload image" });
-//     } else {
-//       const userId = req.user._id;
-//       const { categoryId } = req.query;
-
-//       let foundCategory = await categoriesModel.find({
-//         userId,
-//         categoryId,
-//       });
-//       if (foundCategory) {
-//         const updateCatePic = await categoriesModel.updateOne(
-//           {
-//             _id: categoryId,
-//           },
-//           { categoryPic: req.file.path }
-//         );
-//         res.json({ message: "Done", updateCatePic });
-//       }
-//       console.log(req.file);
-//       // await userModel.updateOne(
-//       //   { _id: req.user._id },
-//       //   { categoryPic: req.file.path }
-//       // );
-//       res.json({ message: "Done" });
-//     }
-//   }
-// };
+export const allUsers = async (req, res) => {
+  const allUsers = await userModel.find({});
+  res.send({ message: "allUsers", allUsers });
+};
 
 export { profile, allExpenses, allCategories, updatePassword };

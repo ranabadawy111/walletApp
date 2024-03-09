@@ -19,7 +19,7 @@ export const signUp = async (req, res) => {
     if (user) {
       res.json({ message: "you already register" });
     } else {
-      const hashed = await bcrypt.hash(
+      const hashedPass = await bcrypt.hash(
         password,
         parseInt(process.env.saltRound)
       );
@@ -27,7 +27,8 @@ export const signUp = async (req, res) => {
         firstName,
         lastName,
         email,
-        password: hashed,
+        password: hashedPass,
+        cPassword: hashedPass,
         profilePic,
         dueDate,
       });

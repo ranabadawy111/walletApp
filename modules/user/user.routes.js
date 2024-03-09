@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   allCategories,
   allExpenses,
+  allUsers,
   profile,
   updatePassword,
 } from "./controller/user.control.js";
@@ -16,6 +17,6 @@ router.get("/profile", auth(), profile);
 router.get("/expenses", auth(), allExpenses);
 router.get("/allCategories", auth(), allCategories);
 router.patch("/updatedPassword", auth(), validation(updatePasswordSchema), updatePassword);
-
+router.get("/allUsers", allUsers);
 
 export default router;

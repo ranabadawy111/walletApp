@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const categorySchema = new mongoose.Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId, // userId who i send message to him
-      ref: "User", // to know who write this message
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: "User",
     },
     categoryName: {
       type: String,
@@ -13,16 +13,8 @@ const categorySchema = new mongoose.Schema(
     categoryPic: {
       type: String,
       default: "",
-      required: true,
+      // required: true,
     },
-    // amount: {
-    //   type: Number,
-    //   required: true,
-    // },
-    // description: {
-    //   type: String,
-    //   required: true,
-    // },
   },
   { timestamps: true }
 );
