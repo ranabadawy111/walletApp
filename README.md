@@ -1,4 +1,4 @@
-# WalletApp-API
+# WalletApp_API
 WalletApp API - project with Express JS framework
 
 # Usage
