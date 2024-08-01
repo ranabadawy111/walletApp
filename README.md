@@ -1,4 +1,4 @@
-# book_store_api
+# WalletApp-API
 WalletApp API - project with Express JS framework
 
 # Usage
